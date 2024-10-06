@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Volunteer{% endblock %}
+
+{% block body %}
+    <h1>Edit Volunteer</h1>
+
+    {{ include('volunteer_crud/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <button class="btnS">
+    <a href="{{ path('app_volunteer_crud_index') }}">back to list</a>
+    </button>
+
+    {{ include('volunteer_crud/_delete_form.html.twig') }}
+{% endblock %}

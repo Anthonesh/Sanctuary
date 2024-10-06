@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos protégés{% endblock %}
+
+{% block main %}
+        <h2>Découvrez nos petits protégées</h2>
+
+            <div class="cards">
+                {% for resident in residents %}
+                <a href="{{ path('app_residents_details', {'id': resident.id}) }}">
+                <img src="{{ asset('' ~ resident.getImage()) }}" alt="cards-image" class="card" />  
+                {% endfor %}
+            </div>
+
+{% endblock %}

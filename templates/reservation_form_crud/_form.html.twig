@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="btns">
+        <button class="btnV">{{ button_label|default('Réserver') }}</button>
+        <button type="button" class="btnS" id="openTermsModal">
+            Voir les termes et conditions
+        </button>        
+        <button class="btnR" id="btnBackToEvent">Retour au calendrier d'évènement</button>
+    </div>
+        {% include 'components/modalTerms.html.twig' %}
+{{ form_end(form) }}

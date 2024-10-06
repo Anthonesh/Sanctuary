@@ -1,0 +1,10 @@
+<h2>Actualités</h2>
+<ul>
+    {% for new in news %}
+        <li>
+            <h6>{{ new.title }}</h6>
+            <p>{{ new.content }}</p>
+            <small>{{ new.date ? new.date|date('d/m/Y H:i') : 'Pas de date' }}</small>
+        </li>
+    {% endfor %}
+</ul>

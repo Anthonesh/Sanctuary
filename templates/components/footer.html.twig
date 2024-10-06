@@ -1,0 +1,37 @@
+{# {% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('css/footer.css')}}">
+{% endblock %} #}
+
+<footer class="footer">
+    <div class="line"></div>
+    <div class="footer-content">
+            <div class="footer-block">
+                <li><a href="{{ path('app_rgpd') }}">Politique de confidentialité</a></li>
+            </div>
+            <div class="footer-icons">
+                <span>
+                <a href="https://www.facebook.com/p/Refuge-de-St-Bres-pour-%C3%A9quid%C3%A9s-100064651545611/">
+                <img src="{{ asset('images/icons/facebook.svg') }}" alt="icon_facebook"  /></a>
+                </span>
+                <span>
+                    <img src="{{ asset('images/icons/email.svg') }}" alt="icon_email" class="email" />
+                </span>
+                <span>
+                    <img src="{{ asset('images/icons/whatsapp.svg') }}" alt="icon_whatsapp" class="whatsapp" />
+                </span>
+                <span>
+                    <img src="{{ asset('images/icons/telephone.svg') }}" alt="icon_phone" class="phone" />
+                </span>
+                <span>
+                    <img src="{{ asset('images/icons/messenger.svg') }}" alt="icone_messenger" class="messenger" />
+                </span>
+                <span>
+                    <a href="{{path('app_donations')}}">
+                    <img src="{{ asset('images/icons/dons.svg') }}" alt="icon_dons" class="dons" />
+                </a>
+                </span>
+            </div>
+        </div>
+        </div>
+    </div>
+</footer>

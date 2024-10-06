@@ -1,0 +1,17 @@
+<div class="carousel-container">
+    <div id="carousel" class="carousel">
+        {# Boucle sur une collection d'objets 'pensionnaire'. Pour chaque 'pensionnaire', un conteneur d'image est créé #}
+        {% for resident in residents %}
+        <div class="carousel-img-container">
+            {# Lien vers la page de détails pour chaque pensionnaire. L'ID est utilisé pour construire l'URL #}
+            <a href="{{ path('app_residents_details', {'id': resident.id}) }}">
+                {# Image du 'pensionnaire', avec une fonction pour récupérer le chemin de l'image basé sur une propriété de l'objet 'pensionnaire' #}
+            <img src="{{ asset(resident.getImage()) }}" alt="carousel-img" class="carousel-img" />
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <img src="{{ asset('images/icons/navigation.svg') }}" alt="Flèche droite" class="navigation-arrow next" id="nextButton">
+    <img src="{{ asset('images/icons/navigation.svg') }}" alt="Flèche gauche" class="navigation-arrow prev" id="prevButton">
+</div>
+

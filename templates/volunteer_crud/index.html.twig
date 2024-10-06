@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Volunteer index{% endblock %}
+
+{% block main %}
+    <h1>Volunteer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StartTime</th>
+                <th>EndTime</th>
+                <th>Places</th>
+                <th>NumberOfVolunteers</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for volunteer in volunteers %}
+            <tr>
+                <td>{{ volunteer.id }}</td>
+                <td>{{ volunteer.startTime ? volunteer.startTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ volunteer.endTime ? volunteer.endTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ volunteer.places }}</td>
+                <td>{{ volunteer.numberOfVolunteers }}</td>
+                <td>
+                    <button class="btnV">
+                    <a href="{{ path('app_volunteer_crud_show', {'id': volunteer.id}) }}">show</a>
+                    </button>
+                    <button class="btnV">
+                    <a href="{{ path('app_volunteer_crud_edit', {'id': volunteer.id}) }}">edit</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btnV">
+    <a href="{{ path('app_volunteer_crud_new') }}">Create new</a>
+    </button>
+{% endblock %}

@@ -1,0 +1,73 @@
+security:
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 
+            algorithm: auto
+            cost: 12
+            time_cost: 4
+            memory_cost: 1024
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+
+            login_throttling:
+                max_attempts: 5
+                interval: '1 minute'
+
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+
+            logout:
+                path: /logout
+                target: / # Redirection après déconnexion
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 1 semaine en secondes
+                path: /
+                secure: true
+
+            access_denied_url: /access-denied
+            entry_point: form_login
+
+        api:
+            pattern: ^/api/
+            stateless: true
+            provider: app_user_provider
+            json_login:
+                check_path: /api/login
+                username_path: email
+                password_path: password
+
+    role_hierarchy:
+        ROLE_VOLUNTEER_PENDING: ROLE_USER
+        ROLE_VOLUNTEER: ROLE_USER
+        ROLE_MEMBER: ROLE_USER
+        ROLE_ADMIN: [ROLE_VOLUNTEER, ROLE_MEMBER, ROLE_USER]
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/volunteer, roles: ROLE_VOLUNTEER }
+        - { path: ^/member, roles: ROLE_MEMBER }
+        - { path: ^/pending-volunteer, roles: ROLE_VOLUNTEER_PENDING }
+
+
+when@test:
+    security:
+        password_hashers:
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4
+                time_cost: 3
+                memory_cost: 10

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReservationForm{% endblock %}
+
+{% block main %}
+    <h1>ReservationForm</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation_form.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ reservation_form.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ reservation_form.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ reservation_form.email }}</td>
+            </tr>
+            <tr>
+                <th>PhoneNumber</th>
+                <td>{{ reservation_form.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>StreetNumber</th>
+                <td>{{ reservation_form.streetNumber }}</td>
+            </tr>
+            <tr>
+                <th>StreetName</th>
+                <td>{{ reservation_form.streetName }}</td>
+            </tr>
+            <tr>
+                <th>PostalCode</th>
+                <td>{{ reservation_form.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ reservation_form.city }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ reservation_form.country }}</td>
+            </tr>
+            <tr>
+                <th>Reservation</th>
+                <td>{{ reservation_form.reservation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button calss="btnS">
+        <a href="{{ path('app_reservation_form_crud_index') }}">back to list</a>
+    </button>
+    <button calss="btnV>
+    <a href="{{ path('app_reservation_form_crud_edit', {'id': reservation_form.id}) }}">edit</a>
+    </button>
+    
+    {{ include('reservation_form_crud/_delete_form.html.twig') }}
+{% endblock %}

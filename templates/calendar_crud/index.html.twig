@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar index{% endblock %}
+
+{% block body %}
+    <h1>Calendar index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StartTime</th>
+                <th>EndTime</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Places</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.id }}</td>
+                <td>{{ calendar.startTime ? calendar.startTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.endTime ? calendar.endTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.title }}</td>
+                <td>{{ calendar.description }}</td>
+                <td>{{ calendar.places }}</td>
+                <td>
+                    <button class="btnV">
+                    <a href="{{ path('app_calendar_crud_show', {'id': calendar.id}) }}">show</a>
+                    </button>
+                    <button class="btnV">
+                    <a href="{{ path('app_calendar_crud_edit', {'id': calendar.id}) }}">edit</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btnV">
+    <a href="{{ path('app_calendar_crud_new') }}">Create new</a>
+    </button>
+{% endblock %}

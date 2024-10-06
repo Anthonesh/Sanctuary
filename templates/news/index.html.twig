@@ -1,0 +1,26 @@
+{# templates/news/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des actualités{% endblock %}
+
+{% block main %}
+    <h1>Liste des actualités</h1>
+
+    <a href="{{ path('app_news_add') }}" class="btn btn-primary">Ajouter une actualité</a>
+
+    <div class="news-list">
+        {% for new in news %}
+            <div class="news-item">
+                <h2>{{ new.title }}</h2>
+                <p>{{ new.content }}</p>
+                <p>Date: {{ new.date ? new.date|date('d-m-Y H:i') : 'Non spécifiée' }}</p>
+                <a href="{{ path('app_news_show', {'id': new.id}) }}" class="btn btn-info">Voir</a>
+                <a href="{{ path('app_news_edit', {'id': new.id}) }}" class="btn btn-warning">Éditer</a>
+                <a href="{{ path('app_news_delete', {'id': new.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?');">Supprimer</a>
+            </div>
+        {% else %}
+            <p>Aucune actualité disponible.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

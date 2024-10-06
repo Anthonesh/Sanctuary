@@ -1,0 +1,8 @@
+{{ form_start(form, {'attr': {'id': 'form'}}) }}
+    {{ form_widget(form) }}
+    {{ form_widget(form2) }}
+    <div class="form-actions">
+        <button type="submit" class="btnSave">Enregistrer</button>
+        <button onclick="location.href='{{ path('app_residents_crud_index') }}'" class="btnBack" type="button">retour</button>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Pensionnaires{% endblock %}
+
+{% block body %}
+    <h1>Edit Pensionnaires</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    {{ form_start(form2) }}
+    {{ form_widget(form2) }}
+    
+    <button class="btn">{{ button_label|default('Update') }}</button>
+    {{ form_end(form2) }}
+    {{ form_end(form) }}
+
+    <button class="btnS">
+    <a href="{{ path('app_residents_crud_index') }}">back to list</a>
+    </button>
+    {{ include('residents_crud/_delete_form.html.twig') }}
+{% endblock %}

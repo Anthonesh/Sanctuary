@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Residents index{% endblock %}
+
+{% block body %}
+    <h1>Residents index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>BirthDate</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for resident in residents %}
+            <tr>
+                <td>{{ resident.id }}</td>
+                <td>{{ resident.name }}</td>
+                <td>{{ resident.type }}</td>
+                <td>{{ resident.birthDate ? resident.birthDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ resident.image }}</td>
+                <td>{{ resident.description }}</td>
+                <td>
+                    <button class="btnV">
+                    <a href="{{ path('app_residents_crud_show', {'id': resident.id}) }}">show</a>
+                    </button>
+                    <button class="btnV">
+                    <a href="{{ path('app_residents_crud_edit', {'id': resident.id}) }}">edit</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btnV>
+    <a href="{{ path('app_residents_crud_new') }}">Create new</a>
+    </button>
+{% endblock %}

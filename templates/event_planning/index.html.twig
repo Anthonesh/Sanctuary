@@ -1,0 +1,30 @@
+{% extends 'base.html.twig'%}
+
+{% block title %}Calendar{% endblock %}
+
+
+{% block main %}
+    {# Conteneur du calendrier avec des données passées via des attributs 'data-' pour les événements et les places disponibles #}
+    <div id="calendar" data-events="{{ events|json_encode|e('html_attr') }}" data-places-disponibles="{{ app.request.attributes.get('places')|default(0) }}">
+    </div>
+
+    {# Fenêtre modale pour afficher les détails d'un événement sélectionné dans le calendrier #}
+    <div class="modal" id="eventDetailsModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {# En-tête de la modale avec le titre de l'événement et un bouton de fermeture #}
+                <div class="modal-header">
+                </div>
+                {# Corps de la modale affichant les informations de l'événement sélectionné #}
+                <div class="modal-body">
+                    <div class="event-time"></div>
+                </div>
+                {# Pied de la modale avec un bouton pour éventuellement réserver une place à l'événement #}
+                <div class="modal-footer">
+                    <button type="button" id="btnReserv"  class="btn" >Reserver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

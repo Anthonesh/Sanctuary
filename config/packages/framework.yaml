@@ -1,0 +1,33 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+    csrf_protection: true
+    validation:
+        enabled: true
+        enable_attributes: true
+
+    # Note that the session will be started ONLY if you read or write from it.
+    session: true
+
+    #esi: true
+    #fragments: true
+
+    http_method_override: true
+    trusted_proxies: '%env(TRUSTED_PROXIES)%'
+    trusted_hosts: '%env(TRUSTED_HOSTS)%'
+
+    rate_limiter:
+        login:
+            policy: 'fixed_window'
+            limit: 5
+            interval: '1 minute'
+        api:
+            policy: 'sliding_window'
+            limit: 100
+            interval: '1 minute'
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file

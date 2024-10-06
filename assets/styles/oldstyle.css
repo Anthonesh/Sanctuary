@@ -1,0 +1,982 @@
+/*Import Font types */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto+Slab&display=swap');
+
+/* Styles généraux */
+body{
+    font-family:'Open Sans',sans-serif;
+    font-size:medium;
+    min-height:100vh;
+    margin:0;
+    background-color:#eddec772!important;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family:'Roboto Slab',serif;
+}
+h1,h2{
+    text-align:center;
+}
+.banner img{
+    width:100%;
+    height:80vh;
+}
+.logo{
+    height:100px;
+    width:auto;
+    object-fit:contain
+    ;z-index:1;
+    margin-top:50px;
+    margin-right:50px;
+}
+.navBar{
+    display:flex;
+    flex-grow:1;
+    align-items:center;
+    justify-content:center;
+    background-color: #eddec772;
+    height : 8vh;
+    width: auto;
+
+}
+.navBar ul{
+    list-style-type:none;
+    display:flex;
+    align-items:center;
+    padding:0;
+}
+.navBar ul a{
+    font-family:'Roboto Slab',serif;
+    text-decoration:none;
+    color:#000000;
+    font-size:14pt;
+    padding:0 20px;
+}
+.iconLogin{
+    height: 50px;
+    width:50px;
+}
+/* Conteneur principal */
+.content{
+    width: 100%;
+    height: auto;
+    display:flex;
+    flex-grow:1;
+    margin-right:1%;
+    margin-left:1%;
+    margin-top:5%;
+    align-items:center;
+}
+/* Aside */
+.aside{
+    flex-basis:10%;
+    width:15%;
+    height:90%;
+    overflow-y:auto;
+    margin-bottom:5%;
+    margin-right:1%;
+}
+.aside-toggle{
+    display:none;
+}
+/* Main */
+.main{
+    flex-grow:1;
+    padding-left:4%;
+    padding-right:4%;
+    width:90%;
+    max-width: 80%;
+    height: auto;
+    flex-basis:85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.description{
+    width : 80%;
+    margin-top: 4%;
+    padding-left: 5%;
+    margin-left:auto;
+    margin-right:auto;
+}
+/* Picture */
+.picture{
+    width:50%;
+    height:auto;
+    aspect-ratio: 16 / 9;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+/* Footer */
+.footer{
+    width: 100%;
+    height: 15vh;
+    padding:2%;
+    background-color:#EDDEC7;
+    color:#000000;
+    margin-top:5%;
+}
+.footer a{
+    text-decoration:none;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.footer-icons{
+    margin-right: 40vw;
+}
+
+
+/* Menu Burger */
+.burger-menu{
+    display:none;
+    cursor:pointer;
+    background-color:#52907F;
+}
+.burger-menu span{
+    display:block;
+    height:2px;
+    width:25px;
+    background-color:#FAF5E9;
+    margin:5px;
+    transition:all 0.3s ease;
+}
+.donButton{
+    width:100px;
+    height:35px;
+    background-color:#183926;
+    color:#ffffff;
+    cursor:pointer;
+    border:none;
+    border-radius:10px;
+}
+/* Media Queries */
+@media (max-width: 480px) {
+    /* Ajustement du conteneur principal */
+    .content{
+        flex-direction:column;
+        width: auto;
+        height: auto;
+    }
+    .banner img{
+        width:100%;
+        height:auto;
+    }
+    /* Ajustement de l'Aside et du Main */
+    .aside,.main{
+        flex-basis:auto;
+        max-width:80%;
+        margin:0;
+        padding:2%;
+        max-height:50%;
+    }
+    .aside{
+        display:none;
+    }
+    .aside.active{
+        display:block;
+    }
+    .aside-toggle{
+        display:block;
+        width:150px;
+        height:35px;
+        background-color:#52907F;
+        color:#ffffff;
+        cursor:pointer;
+        border:none;
+        border-radius:10px;
+    }
+    .navLinks{
+        position:fixed;
+        top:0;
+        right:0;
+        height:100vh;
+        width:50%;
+        background-color:#52908095;
+        z-index:1000;
+        transform:translateX(100%);
+        transition:transform 0.3s ease-in-out;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+    }
+    .navLinks.active{
+        transform:translateX(0);
+    }
+    .navBar ul{
+        list-style-type:none;
+        margin:0;
+        padding-top:15%;
+        width:100%;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
+        align-items:center;
+    }
+    .navLinks ul a{
+        color:#ffffff;
+    }
+    .navLinks li{
+        margin-top:5%;
+    }
+    .burger-menu{
+        display:block;
+        position:absolute;
+        top:20px;
+        right:20px;
+        z-index:1001;
+    }
+    .navBar{
+        display:flex;
+        flex-grow:1;
+        overflow:hidden;
+        align-items:center;
+        justify-content:flex-start;
+    }
+    .logo{
+        max-width:5em;
+        margin:1%;
+        margin-top:4%;
+    }
+}
+
+/*Carousel*/
+/* Styles pour le conteneur du carousel */
+.carousel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden; 
+    width:100%;
+    height: 50vh; 
+}
+
+/* Styles pour le carousel principal */
+.carousel {
+    display: flex;
+    justify-content: center; 
+    position: relative;
+    width: 100%;
+    height: 400px; 
+    align-items: center; 
+    margin-top: 4%;
+}
+
+ /* Styles pour chaque conteneur d'image dans le carousel */
+.carousel-img-container {
+    transition: transform 1s ease, opacity 1s ease;
+    width: 20vh; 
+    flex: 0 0 auto; 
+    opacity: 0; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    position: absolute; 
+}
+
+.carousel-img {
+    max-width: 100%; 
+    max-height: 100%; 
+    height: 20vh;
+    border-radius: 3%;
+}
+
+/* Styles pour l'image sélectionnée */
+.selected {
+    transform: scale(1.1); 
+    z-index: 5; 
+    opacity: 1;
+}
+
+/* Style pour les images directement à côté de la sélectionnée */
+.prev, .next {
+    transform: scale(0.9); 
+    z-index: 4; 
+    opacity: 0.8;
+}
+
+.prev {
+    left: 32%; 
+}
+
+.next {
+    right: 32%;
+    
+}
+
+/* Style pour les images à deux positions de la sélectionnée */
+.prevLeftSecond, .nextRightSecond {
+    transform: scale(0.8); 
+    z-index: 3; 
+    opacity: 0.6;
+}
+
+.prevLeftSecond {
+    left: 22%; 
+    opacity: 0.4;
+}
+
+.nextRightSecond {
+    right: 22%; 
+    opacity: 0.4;
+}
+
+
+/* Style pour les images cachées à l'extrême gauche et droite */
+.hideLeft, .hideRight {
+    display: none; 
+}
+
+.navigation-arrow {
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    z-index: 10;
+    width:100px;
+    height: 42px;
+}
+
+/* Boutons de navigation ajustés pour éviter les superpositions */
+#prevButton{
+    transform: scaleX(-1);
+    left: 200px;
+
+}
+
+#nextButton{
+    right: 200px;
+
+}
+
+/* Media queries pour la responsivité */
+@media screen and (max-width: 768px) {
+    
+
+    /* Ajustements pour le conteneur du carrousel */
+    .carousel-container {
+        width: 100%; /* Utiliser toute la largeur disponible */
+        margin: 0 auto; /* Centrage et suppression des marges extérieures */
+        padding: 10px; /* Ajout d'un peu de padding pour l'espacement */
+        overflow: hidden; /* Cache les débordements éventuels */
+    }
+    
+
+    #prevButton{
+        transform: scaleX(-1);
+        left: -10px;
+    }
+
+    #nextButton{
+        right: -10px;
+    }
+}
+
+/*Residents Cards*/
+/* Styles pour les cartes */
+.cards {
+    display: grid;
+    /* justify-content: center;
+    align-items: center; */
+    margin-top: 5%;
+    margin-bottom: 5%;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Plus flexible */
+    gap: 3% 3%; 
+    width: 100%; /* Utilisez 100% de la largeur disponible */
+    max-width: 100%
+}
+
+/* Styles pour les cartes individuelles */
+.cards .card {
+    width: 100%; /* Largeur adaptative */
+    height: auto; /* Hauteur adaptative */
+    /* Autres styles... */
+}
+
+.card:hover {
+    transform: scale(1.1); /* Agrandissement de l'image sur survol */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /*Définition d'un ombrage */
+}
+
+a:hover {
+    text-decoration: none;
+    border: none;
+    outline: none;
+}
+
+/*Details residents*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: #52907F; 
+    color: #fff; 
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    border: 1px solid #ddd; 
+    padding: 10px;
+    text-align: left;
+}
+
+td img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2; 
+}
+
+td:nth-child(4) {
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+td a {
+    display: inline-block;
+    padding: 5px;
+}
+
+td p {
+    margin: 0;
+    padding: 0;
+}
+
+tr:hover {
+    background-color: #e0e0e0; 
+}
+
+#form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+#form h2 {
+    margin-bottom: 20px;
+}
+
+#form .form-group {
+    margin-bottom: 15px;
+}
+
+#form input, #form select, #form textarea {
+    width: 95%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#form .btnSave {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+#form .btnSave:hover {
+    background-color: #183926;
+    justify-content: center;
+}
+
+
+#form .btnBack {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+#form .btnBack:hover {
+    background-color: #0056b3;
+    justify-content: center;
+}
+
+.form-subtitle{
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+/* Style Create */
+
+/* Style pour le formulaire */
+.custom-form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les champs de formulaire */
+.custom-form .form-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Style for the secondary button (Back to list) */
+.custom-form .btnSave {
+    background-color: #183926; /* Gray */
+    color: white;
+}
+
+.custom-form .btnSave:hover {
+    background-color: #007bff; /* Darker gray */
+}
+
+/* Style for the secondary button (Back to list) */
+.custom-form .btnBack {
+    background-color: #007bff; /* Gray */
+    color: white;
+}
+
+.custom-form .btnBack:hover {
+    background-color: #183926; /* Darker gray */
+}
+
+/* To change the color input's default color */
+input[type='color'] {
+    background-color: #ffffff; /* Change this to the color you want */
+    border: 1px solid #ddd;
+    height: 40px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* For the datetime picker, it depends on the browser and sometimes you can't change it directly */
+/* However, you can attempt some general styling */
+input[type='datetime-local'], input[type='date'], input[type='time'] {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+/* Style pour les boutons */
+.custom-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Style pour les liens */
+.custom-form a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.custom-form a:hover {
+    text-decoration: underline;
+}
+
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+/* Styles pour la table */
+.table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 16px;
+}
+
+.table th {
+    background-color:#52907F;
+    color:#ffffff
+}
+
+.table td {
+    background-color: #ffffff;
+}
+
+
+/* Alignement des boutons sous le tableau */
+.buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style de base pour les boutons */
+.button {
+    padding: 10px 20px; /* Padding autour du texte */
+    margin: 0 10px; /* Marge entre les boutons */
+    border: none; /* Pas de bordure */
+    cursor: pointer; /* Curseur en forme de pointeur */
+    text-decoration: none; /* Pas de soulignement du texte */
+}
+
+.button:hover {
+    background-color: #337a36; /* Couleur de fond au survol */
+}
+
+.btnDelete{
+    background-color: #007bff;
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 10px 5px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btnDelete:hover {
+    background-color: #0069d9; /* Couleur de fond au survol */
+}
+
+
+
+
+/* Style du modal */
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Personnalisation de l'apparence du modal */
+.modal-content {
+    background-color: #36693b;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Ajout d'une animation pour l'ouverture du modal */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+/* Style du modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.btn-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.btn-close:hover,
+.btn-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #183926;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #183926;
+    color: white;
+}
+
+/* Style des boutons standards du modal */
+.modal-footer .btn {
+    background-color: #183926; /* Green */
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.modal-footer .btn:hover {
+    opacity: 1;
+}
+
+
+/*Custom Modal*/
+
+/* Style du modal personnalisé */
+.custom-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */;
+}
+
+/* Modal Content */
+.custom-modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 65%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.custom-btn-close {
+    color: #aaaaaa;
+    position: absolute; /* Position it absolutely */
+    right: 16px; /* Align it to the right */
+    top: 16px; /* Align it to the top */
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.custom-btn-close:hover,
+.custom-btn-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.custom-modal-header {
+    padding: 2px 16px;
+    background-color: #004d40;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.custom-modal-body {padding: 2px 16px;}
+
+.custom-modal-footer {
+    padding: 2px 16px;
+    background-color: #004d40;
+    color: white;
+    display: flex;
+    justify-content: center; /* Center the button */
+}
+
+/* Style des boutons standards du modal personnalisé */
+.custom-modal-footer .custom-btn {
+    background-color: #004d40; /* Dark Green */
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.custom-modal-footer .custom-btn:hover {
+    opacity: 1;
+}
+
+
+
+/*Style payment */
+
+.containerCard {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+} 
+
+/* Container for centering the form */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Form styling */
+form {
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%
+}
+
+form input, form select {
+    width: 95%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+form label{
+    margin-bottom: 5px;
+    width: 200px
+}
+
+
+/* Button styling */
+form button {
+    margin-top: 10px;
+    width: 100%; /* Full width */
+    max-width: 300px; /* Maximum width */
+    padding: 10px; /* Padding inside the button */
+    color: #ffffff; /* White text color */
+    background-color: #184c23; /* Blue background color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+form button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Link styling */
+form a {
+    color: #ffffff; /* Blue text color */
+    text-decoration: none; /* No underline */
+}
+
+form a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Button container styling */
+form .btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button .btn{
+    background-color: #183926;
+}

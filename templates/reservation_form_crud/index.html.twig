@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReservationForm index{% endblock %}
+
+{% block main %}
+    <h1>ReservationForm index</h1>
+
+    <table class="table_crud">
+        <thead>
+            <tr>
+                <th class="header-cell">Id</th>
+                <th class="header-cell">FirstName</th>
+                <th class="header-cell">LastName</th>
+                <th class="header-cell">Email</th>
+                <th class="header-cell">PhoneNumber</th>
+                <th id ="redimension-number-header" class="header-cell">StreetNumber</th>
+                <th class="header-cell">StreetName</th>
+                <th id ="redimension" class="header-cell">PostalCode</th>
+                <th class="header-cell">City</th>
+                <th class="header-cell">Country</th>
+                <th id ="redimension" class="header-cell">Reservation</th>
+                <th class="header-cell">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation_form in reservation_forms %}
+            <tr>
+                <td>{{ reservation_form.id }}</td>
+                <td>{{ reservation_form.firstName }}</td>
+                <td>{{ reservation_form.lastName }}</td>
+                <td>{{ reservation_form.email }}</td>
+                <td>{{ reservation_form.phoneNumber }}</td>
+                <td id ="redimension"> {{ reservation_form.streetNumber }}</td>
+                <td>{{ reservation_form.streetName }}</td>
+                <td id ="redimension">{{ reservation_form.postalCode }}</td>
+                <td>{{ reservation_form.city }}</td>
+                <td>{{ reservation_form.country }}</td>
+                <td id ="redimension">{{ reservation_form.reservation }}</td>
+                <td>
+                    <button class="btnV">
+                        <a href="{{ path('app_reservation_form_crud_show', {'id': reservation_form.id}) }}">show</a>
+                    </button>
+                    <button class="btnV">
+                        <a href="{{ path('app_reservation_form_crud_edit', {'id': reservation_form.id}) }}">edit</a>
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btnV>
+    <a href="{{ path('app_reservation_form_crud_new') }}">Create new</a>
+    </button>
+{% endblock %}

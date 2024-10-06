@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'actualité{% endblock %}
+
+{% block body %}
+    <h1>{{ news.title }}</h1>
+    <p>{{ news.content }}</p>
+    <p>Date: {{ news.date ? news.date|date('d-m-Y H:i') : 'Non spécifiée' }}</p>
+
+    <a href="{{ path('app_news_edit', {'id': news.id}) }}" class="btn btn-warning">Éditer</a>
+    <a href="{{ path('app_news_index') }}" class="btn btn-secondary">Retour à la liste</a>
+{% endblock %}

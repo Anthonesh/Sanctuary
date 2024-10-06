@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Refuge de St brès pour équidés{% endblock %}
+
+
+{% block main %}
+
+
+<table>
+    <tr>
+        <th>Photo</th>
+        <th>Nom</th>
+        <th>Type</th>
+        <th>Date de Naissance</th>
+        <th>Âge</th>
+        <th>Histoire</th>
+        <th>Nourriture</th>
+        <th>Soins</th>
+        <th>Carnet de santé</th>
+        <!-- Ajoutez d'autres colonnes d'informations ici -->
+    </tr>
+    <tr>
+        <td><img src="{{ asset('' ~ resident.getImage()) }}" alt="carousel-img" class="carousel-img" /></td>
+        <td>{{ resident.getName() }}</td>
+        <td>{{ resident.getType() }}</td>
+        <td>{{ resident.getBirthDate() ? resident.getBirthDate()|date('Y-m-d') : '' }}</td>
+        <td>    {% if resident.getBirthDate() %}
+            {% set today = "now"|date("Y-m-d") %}
+            {% set birthday = resident.getBirthDate()|date("Y-m-d") %}
+            {% set age = today|date("Y") - birthday|date("Y") - (today < birthday ? 1 : 0) %}
+            {{ age }}
+        {% else %}
+            N/A
+        {% endif %}
+        </td>
+        <td>{{ resident.description() }}</td>
+        <td>{{ residentInformation.food() }}</td>
+        <td>{{ residentInformation.care() }}</td>
+        <td>{{ residentInformation.healthRecord() }}</td>
+        
+    </tr>
+</table>
+
+
+{% endblock %}
+

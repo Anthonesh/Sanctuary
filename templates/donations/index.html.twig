@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Dons{% endblock %}
+
+{% block javascript %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let boutonContinue = document.querySelector('.continue-to-payment');
+
+    if (boutonContinue) {
+        boutonContinue.addEventListener('click', function() {
+            // Stocker les données dans le session storage
+            let montantDon = document.getElementById('montantDon').value;
+            sessionStorage.setItem('montantDon', montantDon);
+            // Rediriger vers la page de paiement
+            window.location.href = '/dons/paiement';
+        });
+    }
+});
+</script>
+{% endblock %}
+
+{% block main %}
+    <h1>Formulaire de dons</h1>
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form, {'attr': {'id': 'form'}}) }}
+        <h2>Informations du donateur</h2>
+        {{ form_widget(form) }}
+        <div class="btns">
+            <button type="submit" class="btnV btnSave continue-to-payment">Continuer vers le paiement</button>
+            <!-- Button to trigger modal -->
+            <button type="button" class="btnS" id="openTermsModal">
+                Voir les termes et conditions
+            </button>        
+        </div>
+    {{ form_end(form) }}
+
+    {% include 'components/modalTerms.html.twig' %}
+
+{% endblock %}

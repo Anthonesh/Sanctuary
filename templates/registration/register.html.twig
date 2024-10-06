@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block main %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+<div class="form-container">
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
+        {{ form_row(registrationForm.lastName) }}
+        {{ form_row(registrationForm.firstName) }}
+        {{ form_row(registrationForm.phoneNumber) }}
+        {{ form_row(registrationForm.streetNumber) }}
+        {{ form_row(registrationForm.streetName) }}
+        {{ form_row(registrationForm.postalCode) }}
+        {{ form_row(registrationForm.city) }}
+        {{ form_row(registrationForm.country) }}
+        {{ form_row(registrationForm.roles) }}
+
+
+            {{ form_row(registrationForm.agreeTerms, {
+                'label': "J'accepte les termes et conditions."
+            }) }}
+            <button type="button" class="btnS" id="openTermsModal">
+                Voir les termes et conditions
+            </button>        
+
+
+        <button type="submit" class="btnV">Register</button>
+    {{ form_end(registrationForm) }}
+
+    {% include 'components/modalTerms.html.twig' %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Residents{% endblock %}
+
+{% block body %}
+    <h1>Create new Residents</h1>
+
+    {{ include('residents_crud/_form.html.twig') }}
+
+    <button class="btnS">
+    <a href="{{ path('app_residents_crud_index') }}">back to list</a>
+    </button>
+{% endblock %}

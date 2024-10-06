@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block main %}
+<h1>Administration</h1>
+
+<div class ="admin-container">
+    <div class="admin-tab">
+        <h2>Tableau de bord</h2>
+    </div>
+
+    <div class="admin-main">
+        <div class="admin-residents">
+            <h4>Gestion des pensionnaires</h4>
+            <a href="{{ path('app_residents_crud_new') }}">Ajouter un nouveau pensionnaire</a>
+            <a href="{{ path('app_residents_crud_index') }}">Liste des pensionnaires</a>
+        </div>
+        <div class="admin-calendar">
+            <h4>Gestion des évènements</h4>
+            <a href="{{ path('app_calendar_crud_new') }}">Ajouter un évènement</a>
+            <a href="{{ path('app_calendar_crud_index') }}">Liste des évènements</a>
+        </div>
+        <div class="admin-event">
+            <h4>Gestion des participants aux évènements</h4>
+            <a href="{{ path('app_reservation_form_crud_index') }}">Liste des participants aux évènements</a>
+        </div>
+        <div class="admin-users">
+            <h4>Gestion des utilisateurs</h4>
+            <a href="{{ path('app_user_crud_index') }}">Liste des utilisateurs</a>
+        </div>
+        <div class="admin-news">
+            <h4>Gestion des actualités</h4>
+            <a href="{{ path('app_news_add') }}">Ajouter une actualité</a>
+            <a href="{{ path('app_news_index') }}">Liste des actualités</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

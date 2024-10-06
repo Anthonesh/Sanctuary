@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement du don{% endblock %}
+
+
+{% block main %}
+    <h1>Paiement du don</h1>
+
+    {% if stripePublicKey is defined and clientSecret is defined %}
+        <div id="stripe-data" 
+            data-stripe-key="{{ stripePublicKey }}"
+            data-client-secret="{{ clientSecret }}">
+        </div>
+    {% else %}
+        <p>Erreur : Les données Stripe ne sont pas définies correctement.</p>
+    {% endif %}
+    <div class='containerCard'>
+        <div class="form-group">
+            <label for="card-number-element">Card number</label>
+            <div id="card-number-element" class="form-control"></div>
+        </div>
+        <div class="form-group">
+            <label for="card-expiry-element">Expiration date</label>
+            <div id="card-expiry-element" class="form-control"></div>
+        </div>
+        <div class="form-group">
+            <label for="card-cvc-element">Security code</label>
+            <div id="card-cvc-element" class="form-control"></div>
+        </div>
+        <div id="card-errors" role="alert"></div>
+        <button class="btn btn-primary" id="submit-payment">Payer</button>
+    </div>
+{% endblock %}

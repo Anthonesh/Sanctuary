@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="btns">
+        <button class="btnS">{{ button_label|default('Créer') }}</button>
+        <button class="btnV">
+            <a href="{{ path('app_calendar_crud_index') }}">back to list</a>
+        </button>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Volunteer{% endblock %}
+
+{% block body %}
+    <h1>Volunteer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ volunteer.id }}</td>
+            </tr>
+            <tr>
+                <th>StartTime</th>
+                <td>{{ volunteer.startTime ? volunteer.startTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndTime</th>
+                <td>{{ volunteer.endTime ? volunteer.endTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Places</th>
+                <td>{{ volunteer.places }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfVolunteers</th>
+                <td>{{ volunteer.numberOfVolunteers }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btnS">
+    <a href="{{ path('app_volunteer_crud_index') }}">back to list</a>
+    </button>
+
+    <button class="btnV">
+    <a href="{{ path('app_volunteer_crud_edit', {'id': volunteer.id}) }}">edit</a>
+    </button>
+
+
+    {{ include('volunteer_crud/_delete_form.html.twig') }}
+{% endblock %}
