@@ -63,8 +63,8 @@ class VolunteerCrudController extends AbstractController
                     $endTimeData = $form->get('endTime')->getData();
         
                     if ($startTimeData && $endTimeData) {
-                        $startTime = new \DateTime($date . ' ' . $startTimeData->format('H:i:s'));
-                        $endTime = new \DateTime($date . ' ' . $endTimeData->format('H:i:s'));
+                        $startTime = new \DateTime($date . ' ' . $startTimeData->format('H:i'));
+                        $endTime = new \DateTime($date . ' ' . $endTimeData->format('H:i'));
                         $volunteer->setStartTime($startTime);
                         $volunteer->setEndTime($endTime);
         

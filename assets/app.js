@@ -310,58 +310,60 @@ document.addEventListener('turbo:load', function () {
             termsModal.style.display = "none";
         }
     }
-    
 
-
-    // Stripe
     const stripeDataElement = document.getElementById('stripe-data');
+    
+    if (!stripeDataElement) {
+      console.error("L'élément stripe-data n'a pas été trouvé.");
+      return;
+    }
+
     const stripePublicKey = stripeDataElement.getAttribute('data-stripe-key');
     const clientSecret = stripeDataElement.getAttribute('data-client-secret');
 
     const stripe = Stripe(stripePublicKey);
     const elements = stripe.elements();
 
-    const cardNumber = elements.create('cardNumber', { style: { base: { color: '#fff' } } });
-    const cardExpiry = elements.create('cardExpiry', { style: { base: { color: '#fff' } } });
-    const cardCvc = elements.create('cardCvc', { style: { base: { color: '#fff' } } });
+    const cardNumber = elements.create('cardNumber');
+    const cardExpiry = elements.create('cardExpiry');
+    const cardCvc = elements.create('cardCvc');
 
     cardNumber.mount('#card-number-element');
     cardExpiry.mount('#card-expiry-element');
     cardCvc.mount('#card-cvc-element');
 
-    cardNumber.addEventListener('change', function(event) {
-        const displayError = document.getElementById('card-errors');
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = '';
-        }
+    cardNumber.on('change', function(event) {
+      const displayError = document.getElementById('card-errors');
+      displayError.textContent = event.error ? event.error.message : '';
     });
 
     const form = document.getElementById('payment-form');
+    
     form.addEventListener('submit', function(event) {
-        event.preventDefault();
+      event.preventDefault();
 
-        stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: cardNumber,
-                billing_details: {
-                    name: form.querySelector('input[name="name"]').value,
-                    email: form.querySelector('input[name="email"]').value
-                }
-            }
-        }).then(function(result) {
-            if (result.error) {
-                const errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-            } else {
-                if (result.paymentIntent.status === 'succeeded') {
-                    form.submit();
-                }
-            }
-        });
-    });
+      stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+              card: cardNumber,
+              billing_details: {
+                  name: form.querySelector('input[name="name"]').value,
+                  email: form.querySelector('input[name="email"]').value
+              }
+          }
+      }).then(function(result) {
+          if (result.error) {
+              const errorElement = document.getElementById('card-errors');
+              errorElement.textContent = result.error.message;
+          } else {
+              if (result.paymentIntent.status === 'succeeded') {
+                  form.submit();  // Soumettez le formulaire pour finaliser le don.
+              }
+          }
+      });
+  });
 });
+
+
 
     // Modals terms and conditions
     // Sélection des éléments du modal

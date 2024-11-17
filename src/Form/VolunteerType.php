@@ -25,7 +25,7 @@ class VolunteerType extends AbstractType
                 'widget' => 'single_text',
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez entrer l\'heure de début.']),
-                    new Time(['message' => 'Veuillez entrer une heure valide.']),
+
                 ],
             ])
             ->add('endTime', TimeType::class, [
@@ -33,7 +33,7 @@ class VolunteerType extends AbstractType
                 'widget' => 'single_text',
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez entrer l\'heure de fin.']),
-                    new Time(['message' => 'Veuillez entrer une heure valide.']),
+
                 ],
             ])
             ->add('numberOfVolunteers', IntegerType::class, [

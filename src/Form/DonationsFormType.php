@@ -127,6 +127,7 @@ class DonationsFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Donations::class,
+            'csrf_protection' => true,
         ]);
     }
 }

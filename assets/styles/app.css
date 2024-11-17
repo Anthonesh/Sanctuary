@@ -711,6 +711,15 @@ input[type="checkbox"] {
     color: #183926;   /* Couleur du texte */
 }
 
+/* Style paiement */
+.containerCard {
+    width: 50vw;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8fafa;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
 
 /* Media Queries */
 @media (max-width: 480px) {

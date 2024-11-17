@@ -2,32 +2,88 @@
 
 {% block title %}Paiement du don{% endblock %}
 
-
 {% block main %}
-    <h1>Paiement du don</h1>
+<h1>Paiement du don</h1>
 
-    {% if stripePublicKey is defined and clientSecret is defined %}
-        <div id="stripe-data" 
-            data-stripe-key="{{ stripePublicKey }}"
-            data-client-secret="{{ clientSecret }}">
-        </div>
-    {% else %}
-        <p>Erreur : Les données Stripe ne sont pas définies correctement.</p>
-    {% endif %}
-    <div class='containerCard'>
-        <div class="form-group">
-            <label for="card-number-element">Card number</label>
-            <div id="card-number-element" class="form-control"></div>
-        </div>
-        <div class="form-group">
-            <label for="card-expiry-element">Expiration date</label>
-            <div id="card-expiry-element" class="form-control"></div>
-        </div>
-        <div class="form-group">
-            <label for="card-cvc-element">Security code</label>
-            <div id="card-cvc-element" class="form-control"></div>
-        </div>
-        <div id="card-errors" role="alert"></div>
-        <button class="btn btn-primary" id="submit-payment">Payer</button>
+{% if stripePublicKey is defined and clientSecret is defined %}
+    <div id="stripe-data" 
+         data-stripe-key="{{ stripePublicKey }}"
+         data-client-secret="{{ clientSecret }}">
     </div>
+{% else %}
+    <p>Erreur : Les données Stripe ne sont pas définies correctement.</p>
+{% endif %}
+<div class='containerCard'>
+    <div class="form-group">
+        <label for="card-number-element">Numéro de carte</label>
+        <div id="card-number-element" class="form-control"></div>
+    </div>
+    <div class="form-group">
+        <label for="card-expiry-element">Date d'expiration</label>
+        <div id="card-expiry-element" class="form-control"></div>
+    </div>
+    <div class="form-group">
+        <label for="card-cvc-element">Code de sécurité</label>
+        <div id="card-cvc-element" class="form-control"></div>
+    </div>
+    <div id="card-errors" role="alert"></div>
+    <button class="btn btn-primary" id="submit-payment">Payer</button>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const stripeDataElement = document.getElementById('stripe-data');
+    
+    if (!stripeDataElement) {
+      console.error("L'élément stripe-data n'a pas été trouvé.");
+      return;
+    }
+
+    const stripePublicKey = stripeDataElement.getAttribute('data-stripe-key');
+    const clientSecret = stripeDataElement.getAttribute('data-client-secret');
+
+    const stripe = Stripe(stripePublicKey);
+    const elements = stripe.elements();
+
+    const cardNumber = elements.create('cardNumber');
+    const cardExpiry = elements.create('cardExpiry');
+    const cardCvc = elements.create('cardCvc');
+
+    cardNumber.mount('#card-number-element');
+    cardExpiry.mount('#card-expiry-element');
+    cardCvc.mount('#card-cvc-element');
+
+    cardNumber.on('change', function(event) {
+      const displayError = document.getElementById('card-errors');
+      displayError.textContent = event.error ? event.error.message : '';
+    });
+
+    const form = document.getElementById('payment-form');
+    
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+              card: cardNumber,
+              billing_details: {
+                  name: form.querySelector('input[name="name"]').value,
+                  email: form.querySelector('input[name="email"]').value
+              }
+          }
+      }).then(function(result) {
+          if (result.error) {
+              const errorElement = document.getElementById('card-errors');
+              errorElement.textContent = result.error.message;
+          } else {
+              if (result.paymentIntent.status === 'succeeded') {
+                  form.submit();  // Soumettez le formulaire pour finaliser le don.
+              }
+          }
+      });
+  });
+});
+</script>
+
 {% endblock %}

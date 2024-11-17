@@ -43,6 +43,9 @@ class CalendarType extends AbstractType
             ->add('description', TextType::class, [
                 'label' => 'Description',
                 'required' => false,
+                'constraints' => [
+                    new NotBlank(['message' => 'Le titre est obligatoire.']),
+                ],
                 'attr' => ['placeholder' => 'Description de l\'événement']
             ])
             ->add('places', IntegerType::class, [
@@ -67,6 +70,7 @@ class CalendarType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Calendar::class,
+            'csrf_protection' => true,
         ]);
     }
 }

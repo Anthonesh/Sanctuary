@@ -72,16 +72,19 @@ class DonationsController extends AbstractController
                 'amount' => $donsFormData->getAmount() * 100, // Montant en centimes
                 'currency' => $donsFormData->getCurrency(),
                 'payment_method_types' => ['card'],
-                'show_carousel'=> false
             ]);
 
             $clientSecret = $paymentIntent->client_secret;
             $residents = $residentsRepo->findAll();
+            $news = $entityManager->getRepository(News::class)->findBy([], ['date' => 'DESC']);
+
 
             return $this->render('donations/payment.html.twig', [
                 'stripePublicKey' => $stripePublicKey,
                 'clientSecret' => $clientSecret,
-                'residents' => $residents
+                'residents' => $residents,
+                'show_carousel'=> true,
+                'news' => $news,
             ]);
 
         } catch (ApiErrorException $e) {

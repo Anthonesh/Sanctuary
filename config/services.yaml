@@ -10,6 +10,7 @@ parameters:
 
 
 services:
+    # default configuration for services in src/AppBundle
     # default configuration for services in *this* file
     _defaults:
     # default configuration for services in *this* file
@@ -22,6 +23,7 @@ services:
     App\:
         resource: '../src/'
         exclude:
+            - '../src/AppBundle/Controller/'
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
@@ -30,3 +32,5 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\MessagerieService:
         arguments: ['%env(LOGIN_MAIL)%', '%env(PASSWORD_MAIL)%', '%env(SERVER_MAIL)%', '%env(PORT_MAIL)%']
+    
+    
